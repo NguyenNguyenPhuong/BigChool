@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+<ul class="nav navbar-nav navbar-right">
+    <!-- Example single danger button -->
+    <li class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle"style="margin-top:9px; background: linear-gradient(-45deg,#e0568b,#071156); animation: gradient 0.1s ease infinite; " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
+            <span> @User.Identity.GetUserName()</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li class="dropdown-divider"></li>     
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    </li>
+    @*<li>
+        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+    </li>*@
+    
+</ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
